@@ -53,7 +53,7 @@ public class Fatura {
 	public double getValor() {
 		return valor;
 	}
-    private int setNumero(String n) {
+    public int setNumero(String n) {
     	try {
     		numero = Integer.parseInt(n);
     		return numero;
