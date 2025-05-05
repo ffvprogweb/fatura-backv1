@@ -7,24 +7,33 @@ import java.text.SimpleDateFormat;
 import java.util.InputMismatchException;
 import java.util.Objects;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 
+@Entity
 public class Fatura {
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 	Integer numero;
 	String CNPJdaContratada;
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	String dataEmissao;
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	String dataVencimento;
 	String servicoContratado;
 	Double valor;
-	Logger logger = LogManager.getLogger(this.getClass());
+	
 
 	public Fatura(String numero, String cnpj, String dataVencimento, String desc, String valor) {
 		this.numero = setNumero(numero);
@@ -37,7 +46,13 @@ public class Fatura {
 
 	public Fatura() {
 	}
+	public Long getId() {
+		return id;
+	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public int getNumero() {
 		return numero;
 	}
@@ -64,14 +79,14 @@ public class Fatura {
 	private String setDataEmissao() {
 		DateTime dataAtual = new DateTime();
 		DateTimeFormatter fmt = DateTimeFormat.forPattern("dd/MM/YYYY");
-		logger.info(">>>>>> setDataEmissao para data de hoje => " + dataAtual.toString(fmt));
+		
 		return dataAtual.toString(fmt);
 	}
 
 	private String setDataVencimento(String data) {
 		if ((data != null) && (dataIsValida(data)) && (dtVencMaiorDtAtual(getDataEmissao(), data))
 				&& (!ehDomingo(data))) {
-			logger.info(">>>>>> setDataVencimento  => " + data);
+			
 			return data;
 		} else {
 			throw new IllegalArgumentException("Data de vencimento invalida");
@@ -83,7 +98,7 @@ public class Fatura {
 			DateTimeFormatter fmt = DateTimeFormat.forPattern("dd/MM/yyyy");
 			DateTime umaData = fmt.parseDateTime(data);
 			if (umaData.dayOfWeek().getAsText().equals("domingo")) {
-				logger.info(">>>>>> ehdomingo => true ");
+				
 				return true;
 			} else {
 				return false;
@@ -101,7 +116,7 @@ public class Fatura {
 				df.parse(data);
 				return true;
 			} catch (ParseException ex) {
-				logger.info(">>>>>> isValida false=> " + ex.getMessage());
+			
 				return false;
 			}
 		} else {
@@ -117,13 +132,13 @@ public class Fatura {
 
 			Days d = Days.daysBetween(dtAtual, dtVenc);
 			if (d.getDays() >= 0) {
-				logger.info(">>>>>> dataVencMaiorDataAtual => true ");
+			
 				return true;
 			} else {
 				return false;
 			}
 		} catch (Exception e) {
-			logger.info(">>>>>> metodo dtVencMaiorDtAtual() retornou erro nao esperado =>" + e.getMessage());
+		
 			throw new IllegalArgumentException("Data invalida");
 		}
 	}
@@ -135,13 +150,13 @@ public class Fatura {
 			if (valorTemp > 0) {
 				DecimalFormat formato = new DecimalFormat("#,##0.00");
 				String valorFormatado = formato.format(valorTemp);
-				logger.info(">>>>>> valor formatado  =>" + valorFormatado);
+			
 				return valorTemp;
 			} else {
 				throw new IllegalArgumentException("Valor da fatura invalido");
 			}
 		} catch (Exception e) {
-			logger.info(">>>>>> valor da fatura invalido  =>" + e.getMessage());
+		
 			throw new IllegalArgumentException("Valor da fatura invalido");
 		}
 	}
@@ -169,10 +184,10 @@ public class Fatura {
 	public String setServicoContratado(String servico) {
 		
 			if ((servico ==null) || (servico.isBlank())) {
-				logger.info(">>>>>> setServicoContratado invalido ");
+			
 				throw new IllegalArgumentException("Descricao do servico invalido");
 			} else {
-				logger.info(">>>>>> setServicoContratado valido ");
+			
 				return servico;
 			}
 		

@@ -3,17 +3,16 @@ package com.fatec.fatura.persistencia;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
-
 import com.fatec.fatura.model.Fatura;
 
-class Req16EmissaoDaFaturaTests {
+class Req16EmissaoDaFaturaTUTests {
 
 	Fatura fatura = new Fatura();
 	Logger logger = LogManager.getLogger(this.getClass());
+	
 	
 	@Test
 	void ct01_quando_dados_validos_fatura_nao_eh_nulo() {
@@ -70,6 +69,5 @@ class Req16EmissaoDaFaturaTests {
 		}
 		
 	}
-
-
+	
 }

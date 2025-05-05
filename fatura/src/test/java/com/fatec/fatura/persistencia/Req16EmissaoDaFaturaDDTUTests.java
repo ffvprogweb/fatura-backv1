@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 
 import com.fatec.fatura.model.Fatura;
 
-class Req16EmissaoDaFaturaDDTests {
+class Req16EmissaoDaFaturaDDTUTests {
 	Fatura fatura = new Fatura();
 	public String obtemDataAtual() {
 		DateTime data = new DateTime();

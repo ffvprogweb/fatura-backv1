@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import com.fatec.fatura.model.Fatura;
 
-public class Req16EmissaoDaFaturaDD2Tests {
+public class Req16EmissaoDaFaturaDD2TUTests {
 	CsvReader leitor;
 	List<FaturaDadosDeTeste> d;
 	Fatura fatura;
