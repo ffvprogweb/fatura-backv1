@@ -23,21 +23,20 @@ public class Req16EmissaoDaFaturaDD2TUTests {
 			d = CsvReader.lerArquivo("e:/dataset_fatura/fatura2.csv");
 			System.out.println(">>>>>>>>> quantidade de registros =>" + d.size());
 		} catch (IOException e) {
-			System.out.println(">>>>>> Erro de IO");
+			System.out.println(">>>>>> Erro de IO => " + e.getMessage());
 		}
 
 		for (FaturaDadosDeTeste f : d) {
 			try {
-				System.out.println(">>>>>> fatura numero => " + f.numero());
+				System.out.println(">>>>>> fatura numero => " + f.cnpj());
 				resultadoEsperado = f.re();
-				fatura = new Fatura(f.numero(), f.cnpj(), f.dtemissao(), f.servico(), f.valor());
-				System.out.println("fatura => " + fatura.getNumero());
+				fatura = new Fatura(f.cnpj(), f.dtemissao(), f.servico(), f.valor());
 				assertNotNull(fatura);
 				assertEquals(resultadoEsperado, "satisfatório");
 
 			}
 			catch (Exception e) {
-				System.out.println(">>>>>>>>> classe invalida =>" + resultadoEsperado);
+				System.out.println(">>>>>>>>> classe invalida =>" + e.getMessage() + "-" + resultadoEsperado);
 				assertEquals(resultadoEsperado, e.getMessage());
 			}
 		}

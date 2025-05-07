@@ -22,9 +22,9 @@ class Req16EmissaoDaFaturaDDTUTests {
 
 	@ParameterizedTest
 	@CsvFileSource(files = "e:/dataset_fatura/fatura2.csv", numLinesToSkip = 1)
-	void validaFatura(String numero, String cnpj, String dataVencimento, String desc, String valor, String re) {
+	void validaFatura(String cnpj, String dataVencimento, String desc, String valor, String re) {
 		try {
-			fatura = new Fatura(numero, cnpj, dataVencimento, desc, valor);
+			fatura = new Fatura(cnpj, dataVencimento, desc, valor);
 			assertNotNull(fatura);
 			String dataDeHoje = obtemDataAtual();
 			assertEquals(dataDeHoje,fatura.getDataEmissao());

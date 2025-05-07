@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fatec.fatura.model.Fatura;
+import com.fatec.fatura.model.FaturaDto;
+
 @Service
 public class FaturaService implements IFaturaServico {
 	Logger logger = LogManager.getLogger(this.getClass());
@@ -15,13 +17,17 @@ public class FaturaService implements IFaturaServico {
 	FaturaRepository faturaRepository;
 
 	@Override
-	public FaturaResponse registrar(Fatura fatura) {
+	public FaturaResponse registrar(FaturaDto f) {
 		try {
-		Fatura novaFatura = faturaRepository.save(fatura);
-		return new FaturaResponse (true, "Fatura registrada", novaFatura);
+			logger.info(">>>>>> 2 fatura service metodo registrar fatura --> " + f.servicoContratado());
+			//obtem a data de hoje do sistema e nstancia o objeto fatura
+			Fatura fatura = new Fatura(f.cnpj(), f.dataVencimento(), f.servicoContratado(), f.valor());
+			Fatura novaFatura = faturaRepository.save(fatura);
+			
+			return new FaturaResponse(true, "Fatura registrada", novaFatura);
 		} catch (Exception e) {
-			logger.info(">>>>>> Metodo registrar fatura - erro no cadastro da fatura" + e.getMessage());
-			return new FaturaResponse (false, "Erro no registro da fatura", null);
+			logger.info(">>>>>> FaturaService metodo registrar fatura - erro no cadastro da fatura -> " + e.getMessage());
+			return new FaturaResponse(false, "Erro no registro da fatura", null);
 		}
 	}
 

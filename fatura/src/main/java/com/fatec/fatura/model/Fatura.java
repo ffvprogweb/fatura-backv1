@@ -25,8 +25,7 @@ public class Fatura {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	Integer numero;
-	String CNPJdaContratada;
+	String cnpj;
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	String dataEmissao;
 	@JsonFormat(pattern = "dd/MM/yyyy")
@@ -35,12 +34,12 @@ public class Fatura {
 	Double valor;
 	
 
-	public Fatura(String numero, String cnpj, String dataVencimento, String desc, String valor) {
-		this.numero = setNumero(numero);
-		this.CNPJdaContratada = setCnpj(cnpj);
+	public Fatura(String cnpj, String dataVencimento, String servicoContratado, String valor) {
+		
+		this.cnpj = setCnpj(cnpj);
 		this.dataEmissao = setDataEmissao();
 		this.dataVencimento = setDataVencimento(dataVencimento);
-		this.servicoContratado = setServicoContratado(desc);
+		this.servicoContratado = setServicoContratado(servicoContratado);
 		this.valor = setValorFatura(valor);
 	}
 
@@ -53,10 +52,7 @@ public class Fatura {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public int getNumero() {
-		return numero;
-	}
-
+	
 	public String getDataEmissao() {
 		return dataEmissao;
 	}
@@ -68,22 +64,14 @@ public class Fatura {
 	public double getValor() {
 		return valor;
 	}
-    public int setNumero(String n) {
-    	try {
-    		numero = Integer.parseInt(n);
-    		return numero;
-    	} catch (Exception e) {
-    		throw new IllegalArgumentException("Numero da fatura invalido");
-    	}
-    }
-	private String setDataEmissao() {
+   
+	public String setDataEmissao() {
 		DateTime dataAtual = new DateTime();
 		DateTimeFormatter fmt = DateTimeFormat.forPattern("dd/MM/YYYY");
-		
 		return dataAtual.toString(fmt);
 	}
 
-	private String setDataVencimento(String data) {
+	public String setDataVencimento(String data) {
 		if ((data != null) && (dataIsValida(data)) && (dtVencMaiorDtAtual(getDataEmissao(), data))
 				&& (!ehDomingo(data))) {
 			
@@ -139,7 +127,7 @@ public class Fatura {
 			}
 		} catch (Exception e) {
 		
-			throw new IllegalArgumentException("Data invalida");
+			throw new IllegalArgumentException("Fatura data invalida => " + e.getMessage());
 		}
 	}
 
@@ -175,6 +163,9 @@ public class Fatura {
 			throw new IllegalArgumentException("CNPJ invalido");
 		}
 
+	}
+	public String getCnpj() {
+		return this.cnpj;
 	}
 
 	public String getServicoContratado() {
@@ -252,7 +243,14 @@ public class Fatura {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(dataEmissao, dataVencimento, numero, valor);
+		return Objects.hash(dataEmissao, dataVencimento, valor);
 	}
+
+	@Override
+	public String toString() {
+		return "Fatura [id=" + id + ", cnpj=" + cnpj + ", dataEmissao=" + dataEmissao + ", dataVencimento="
+				+ dataVencimento + ", servicoContratado=" + servicoContratado + ", valor=" + valor + "]";
+	}
+	
 
 }

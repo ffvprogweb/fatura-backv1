@@ -1,13 +1,13 @@
 package com.fatec.fatura.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.fatec.fatura.model.Fatura;
+import com.fatec.fatura.model.FaturaDto;
 
 public interface IFaturaServico {
 
-	public FaturaResponse registrar(Fatura fatura);
+	public FaturaResponse registrar(FaturaDto fatura);
 
 	public FaturaResponse consultarPorId(String id);
 
