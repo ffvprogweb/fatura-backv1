@@ -16,4 +16,6 @@ public interface IFaturaServico {
 	public List<Fatura> consultarMes(int mesEmissao);
 
 	public List<Fatura> consultaCnpj(String cnpj);
+	
+	public List<Fatura> consultaTodos();
 }

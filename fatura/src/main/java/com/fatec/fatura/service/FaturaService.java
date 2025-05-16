@@ -55,4 +55,10 @@ public class FaturaService implements IFaturaServico {
 		return null;
 	}
 
+	@Override
+	public List<Fatura> consultaTodos() {
+		// TODO Auto-generated method stub
+		return faturaRepository.findAll();
+	}
+
 }
