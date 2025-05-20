@@ -29,11 +29,6 @@ public class FaturaController {
 	@PostMapping
 	public ResponseEntity<Object> saveFatura(@RequestBody FaturaDto fatura) {
 		logger.info(">>>>>> 1 controller metodo savefatura --> " + fatura.cnpj());
-//		Fatura novaFatura = new Fatura ();
-//		novaFatura.setCnpj(fatura.cnpj());
-//		novaFatura.setDataVencimento(fatura.dataVencimento());
-//		novaFatura.setServicoContratado(fatura.servicoContratado());
-//		novaFatura.setValor(fatura.valor());
 		FaturaResponse f = faturaServico.registrar(fatura);
 		logger.info(">>>>>> 2 controller metodo savefatura --> " + f.getFatura().toString());
 		if (!f.isSucesso()) {
