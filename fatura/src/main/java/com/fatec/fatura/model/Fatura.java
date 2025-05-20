@@ -137,8 +137,8 @@ public class Fatura {
 			Double valorTemp = Double.parseDouble(entrada);
 
 			if (valorTemp > 0) {
-				//DecimalFormat formato = new DecimalFormat("#,##0.00");
-				//String valorFormatado = formato.format(valorTemp);
+				DecimalFormat formato = new DecimalFormat("#,##0.00");
+				String valorFormatado = formato.format(valorTemp);
 				this.valor = valorTemp;
 				return valorTemp;
 			} else {

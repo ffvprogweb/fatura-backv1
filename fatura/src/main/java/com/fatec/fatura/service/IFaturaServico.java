@@ -18,4 +18,6 @@ public interface IFaturaServico {
 	public List<Fatura> consultaCnpj(String cnpj);
 	
 	public List<Fatura> consultaTodos();
+	
+	
 }
