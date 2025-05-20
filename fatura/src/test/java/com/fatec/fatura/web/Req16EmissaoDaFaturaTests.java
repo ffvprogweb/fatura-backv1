@@ -25,7 +25,7 @@ class Req16EmissaoDaFaturaTests {
 	Logger logger = LogManager.getLogger(this.getClass());
 
 	@Test
-	void test() {
+	void validaAPI() {
 		String URLBase = "/api/v1/faturas";
 		// ********************************************************************************************
 		// Given - dado que as informacoes de cliente sao validas E que existem 3

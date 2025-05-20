@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 
 import com.fatec.fatura.model.Fatura;
 
-class Req16EmissaoDaFaturaDDTUTests {
+class TUReq16EmissaoDaFaturaDDTests {
 	Fatura fatura = new Fatura();
 	public String obtemDataAtual() {
 		DateTime data = new DateTime();
@@ -21,7 +21,7 @@ class Req16EmissaoDaFaturaDDTUTests {
 	}
 
 	@ParameterizedTest
-	@CsvFileSource(files = "e:/dataset_fatura/fatura2.csv", numLinesToSkip = 1)
+	@CsvFileSource(files = "c:/edson/dataset_fatura/fatura2.csv", numLinesToSkip = 1)
 	void validaFatura(String cnpj, String dataVencimento, String desc, String valor, String re) {
 		try {
 			fatura = new Fatura(cnpj, dataVencimento, desc, valor);

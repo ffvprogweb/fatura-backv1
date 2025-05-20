@@ -18,7 +18,7 @@ import com.fatec.fatura.service.FaturaResponse;
 import com.fatec.fatura.service.IFaturaServico;
 
 @SpringBootTest
-class Req16EmissaoDaFaturaTITests {
+class TIReq16EmissaoDaFaturaTests {
 
 	Logger logger = LogManager.getLogger(this.getClass());
 	@Autowired
@@ -43,6 +43,9 @@ class Req16EmissaoDaFaturaTITests {
 
 		}
 	}
+	/*
+	 * Esta condição de teste ja foi verificada no teste unitario
+	 */
 	@Test
 	void ct02_quando_dados_invalidos_retorna_mensagem_erro() {
 		// dado que as informacoes de fatura sao invalidas

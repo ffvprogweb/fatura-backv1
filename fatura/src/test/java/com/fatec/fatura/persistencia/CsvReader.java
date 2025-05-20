@@ -34,11 +34,11 @@ public class CsvReader {
                         faturas.add(fatura);
                     } catch (Exception e) {
                         System.err.println("Erro na leitura do arquivo na linha: " + linha);
-                        // Você pode optar por lançar a exceção novamente ou tratar de outra forma
+                        
                     }
                 } else {
                     System.err.println("Linha inválida no arquivo CSV (número incorreto de campos): " + linha);
-                    // Você pode optar por lançar uma exceção ou ignorar a linha
+                    
                 }
             }
         }

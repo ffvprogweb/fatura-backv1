@@ -19,7 +19,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-
 @Entity
 public class Fatura {
 	@Id
@@ -32,19 +31,19 @@ public class Fatura {
 	String dataVencimento;
 	String servicoContratado;
 	Double valor;
-	
 
 	public Fatura(String cnpj, String dataVencimento, String servicoContratado, String valor) {
-		
-		this.cnpj = setCnpj(cnpj);
-		this.dataEmissao = setDataEmissao();
-		this.dataVencimento = setDataVencimento(dataVencimento);
-		this.servicoContratado = setServicoContratado(servicoContratado);
-		this.valor = setValorFatura(valor);
+
+		setCnpj(cnpj);
+		setDataEmissao();
+		setDataVencimento(dataVencimento);
+		setServicoContratado(servicoContratado);
+		setValorFatura(valor);
 	}
 
 	public Fatura() {
 	}
+
 	public Long getId() {
 		return id;
 	}
@@ -52,7 +51,7 @@ public class Fatura {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public String getDataEmissao() {
 		return dataEmissao;
 	}
@@ -64,20 +63,22 @@ public class Fatura {
 	public double getValor() {
 		return valor;
 	}
-   
+
 	public String setDataEmissao() {
 		DateTime dataAtual = new DateTime();
 		DateTimeFormatter fmt = DateTimeFormat.forPattern("dd/MM/YYYY");
+		this.dataEmissao = dataAtual.toString(fmt);
 		return dataAtual.toString(fmt);
 	}
 
 	public String setDataVencimento(String data) {
 		if ((data != null) && (dataIsValida(data)) && (dtVencMaiorDtAtual(getDataEmissao(), data))
 				&& (!ehDomingo(data))) {
-			
+            this.dataVencimento = data;
 			return data;
 		} else {
-			throw new IllegalArgumentException("Data de vencimento invalida");
+			throw new IllegalArgumentException(
+					"Data de vencimento: formato invalido ou domingo ou menor que data atual");
 		}
 	}
 
@@ -86,7 +87,7 @@ public class Fatura {
 			DateTimeFormatter fmt = DateTimeFormat.forPattern("dd/MM/yyyy");
 			DateTime umaData = fmt.parseDateTime(data);
 			if (umaData.dayOfWeek().getAsText().equals("domingo")) {
-				
+
 				return true;
 			} else {
 				return false;
@@ -104,7 +105,7 @@ public class Fatura {
 				df.parse(data);
 				return true;
 			} catch (ParseException ex) {
-			
+
 				return false;
 			}
 		} else {
@@ -120,13 +121,13 @@ public class Fatura {
 
 			Days d = Days.daysBetween(dtAtual, dtVenc);
 			if (d.getDays() >= 0) {
-			
+
 				return true;
 			} else {
 				return false;
 			}
 		} catch (Exception e) {
-		
+
 			throw new IllegalArgumentException("Fatura data invalida => " + e.getMessage());
 		}
 	}
@@ -134,17 +135,17 @@ public class Fatura {
 	public double setValorFatura(String entrada) {
 		try {
 			Double valorTemp = Double.parseDouble(entrada);
-			
+
 			if (valorTemp > 0) {
-				DecimalFormat formato = new DecimalFormat("#,##0.00");
-				String valorFormatado = formato.format(valorTemp);
-			
+				//DecimalFormat formato = new DecimalFormat("#,##0.00");
+				//String valorFormatado = formato.format(valorTemp);
+				this.valor = valorTemp;
 				return valorTemp;
 			} else {
 				throw new IllegalArgumentException("Valor da fatura invalido");
 			}
 		} catch (Exception e) {
-		
+
 			throw new IllegalArgumentException("Valor da fatura invalido");
 		}
 	}
@@ -155,6 +156,7 @@ public class Fatura {
 	public String setCnpj(String cnpj) {
 		try {
 			if (cnpjIsValido(cnpj)) {
+				this.cnpj = cnpj;
 				return cnpj;
 			} else {
 				throw new IllegalArgumentException("CNPJ invalido");
@@ -164,6 +166,7 @@ public class Fatura {
 		}
 
 	}
+
 	public String getCnpj() {
 		return this.cnpj;
 	}
@@ -173,15 +176,15 @@ public class Fatura {
 	}
 
 	public String setServicoContratado(String servico) {
-		
-			if ((servico ==null) || (servico.isBlank())) {
-			
-				throw new IllegalArgumentException("Descricao do servico invalido");
-			} else {
-			
-				return servico;
-			}
-		
+
+		if ((servico == null) || (servico.isBlank())) {
+
+			throw new IllegalArgumentException("Descricao do servico invalido");
+		} else {
+			this.servicoContratado = servico;
+			return servico;
+		}
+
 	}
 
 	public boolean cnpjIsValido(String cnpj) {
@@ -251,6 +254,5 @@ public class Fatura {
 		return "Fatura [id=" + id + ", cnpj=" + cnpj + ", dataEmissao=" + dataEmissao + ", dataVencimento="
 				+ dataVencimento + ", servicoContratado=" + servicoContratado + ", valor=" + valor + "]";
 	}
-	
 
 }

@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import com.fatec.fatura.model.Fatura;
 import com.fatec.fatura.model.FaturaDto;
 
-class Req16EmissaoDaFaturaTUTests {
+class TUReq16EmissaoDaFaturaTests {
 
 	Logger logger = LogManager.getLogger(this.getClass());
 	Fatura fatura;

@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import com.fatec.fatura.model.Fatura;
 
-public class Req16EmissaoDaFaturaDD2TUTests {
+public class TUReq16EmissaoDaFaturaDD2Tests {
 	CsvReader leitor;
 	List<FaturaDadosDeTeste> d;
 	Fatura fatura;
@@ -20,7 +20,7 @@ public class Req16EmissaoDaFaturaDD2TUTests {
 	public void ct_verifica_comportamento_fatura() {
 		String resultadoEsperado = "";
 		try {
-			d = CsvReader.lerArquivo("e:/dataset_fatura/fatura2.csv");
+			d = CsvReader.lerArquivo("c:/edson/dataset_fatura/fatura2.csv");
 			System.out.println(">>>>>>>>> quantidade de registros =>" + d.size());
 		} catch (IOException e) {
 			System.out.println(">>>>>> Erro de IO => " + e.getMessage());
@@ -36,7 +36,7 @@ public class Req16EmissaoDaFaturaDD2TUTests {
 
 			}
 			catch (Exception e) {
-				System.out.println(">>>>>>>>> classe invalida =>" + e.getMessage() + "-" + resultadoEsperado);
+				System.out.println(">>>>>> classe invalida =>" + e.getMessage() + "-" + resultadoEsperado);
 				assertEquals(resultadoEsperado, e.getMessage());
 			}
 		}
