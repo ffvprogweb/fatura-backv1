@@ -178,7 +178,6 @@ public class Fatura {
 	public String setServicoContratado(String servico) {
 
 		if ((servico == null) || (servico.isBlank())) {
-
 			throw new IllegalArgumentException("Descricao do servico invalido");
 		} else {
 			this.servicoContratado = servico;

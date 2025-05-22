@@ -20,7 +20,7 @@ public class FaturaService implements IFaturaServico {
 	public FaturaResponse registrar(FaturaDto f) {
 		try {
 			logger.info(">>>>>> 2 fatura service metodo registrar fatura --> " + f.servicoContratado());
-			//obtem a data de hoje do sistema e nstancia o objeto fatura
+			//obtem a data de hoje do sistema e instancia o objeto fatura
 			Fatura fatura = new Fatura(f.cnpj(), f.dataVencimento(), f.servicoContratado(), f.valor());
 			Fatura novaFatura = faturaRepository.save(fatura);
 			

@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
 
 import com.fatec.fatura.model.Fatura;
-import com.fatec.fatura.model.FaturaDto;
+
 
 class TUReq16EmissaoDaFaturaTests {
 

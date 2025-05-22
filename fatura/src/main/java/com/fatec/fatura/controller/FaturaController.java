@@ -3,6 +3,7 @@ package com.fatec.fatura.controller;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,11 +29,11 @@ public class FaturaController {
 
 	@PostMapping
 	public ResponseEntity<Object> saveFatura(@RequestBody FaturaDto fatura) {
-		logger.info(">>>>>> 1 controller metodo savefatura --> " + fatura.cnpj());
+		logger.info(">>>>>> 1 controller metodo savefatura --> " + fatura.servicoContratado());
 		FaturaResponse f = faturaServico.registrar(fatura);
-		logger.info(">>>>>> 2 controller metodo savefatura --> " + f.getFatura().toString());
+		//logger.info(">>>>>> 2 controller metodo savefatura --> " + f.getFatura().toString());
 		if (!f.isSucesso()) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(f.getMensagem());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).contentType(MediaType.APPLICATION_JSON).body(f.getMensagem());
 		} else {
 			return ResponseEntity.status(HttpStatus.CREATED).body(f.getFatura());
 		}
