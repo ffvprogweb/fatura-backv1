@@ -19,11 +19,11 @@ public class FaturaService implements IFaturaServico {
 	@Override
 	public FaturaResponse registrar(FaturaDto f) {
 		try {
-			logger.info(">>>>>> 2 fatura service metodo registrar fatura --> " + f.servicoContratado());
+			logger.info(">>>>>> 2 fatura service metodo registrar fatura iniciado --> " + f.servicoContratado());
 			//obtem a data de hoje do sistema e instancia o objeto fatura
 			Fatura fatura = new Fatura(f.cnpj(), f.dataVencimento(), f.servicoContratado(), f.valor());
 			Fatura novaFatura = faturaRepository.save(fatura);
-			
+			logger.info(">>>>>> 3 fatura service metodo registrar fatura response");
 			return new FaturaResponse(true, "Fatura registrada", novaFatura);
 		} catch (Exception e) {
 			logger.info(">>>>>> FaturaService metodo registrar fatura - erro no cadastro da fatura -> " + e.getMessage());

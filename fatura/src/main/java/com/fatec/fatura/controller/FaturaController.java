@@ -31,7 +31,6 @@ public class FaturaController {
 	public ResponseEntity<Object> saveFatura(@RequestBody FaturaDto fatura) {
 		logger.info(">>>>>> 1 controller metodo savefatura --> " + fatura.servicoContratado());
 		FaturaResponse f = faturaServico.registrar(fatura);
-		//logger.info(">>>>>> 2 controller metodo savefatura --> " + f.getFatura().toString());
 		if (!f.isSucesso()) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).contentType(MediaType.APPLICATION_JSON).body(f.getMensagem());
 		} else {
@@ -40,6 +39,7 @@ public class FaturaController {
 	}
 	@GetMapping
 	public ResponseEntity<Object> consultaFatura(){
+		logger.info(">>>>>> 1 controller metodo consultafatura " );
 		return ResponseEntity.status(HttpStatus.CREATED).body(faturaServico.consultaTodos());
 	}
 }
