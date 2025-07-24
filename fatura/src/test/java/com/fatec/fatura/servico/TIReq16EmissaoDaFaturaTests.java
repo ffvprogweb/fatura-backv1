@@ -32,10 +32,10 @@ class TIReq16EmissaoDaFaturaTests {
 
 			// dado que as informacoes de fatura sao validas
 			// quando confirmo a fatura
-			FaturaDto fatura = new FaturaDto("71112917000126","","02/10/2025", "moveis planejados", "1000.50");
+			FaturaDto fatura = new FaturaDto("06615406004","","02/10/2025", "moveis planejados", "1000.50");
 			// entao fatura é registrada com data de emisssao igual a data de hoje
 			Fatura faturaCadastrada = servicoFatura.registrar(fatura).getFatura();
-			assertEquals("71112917000126", faturaCadastrada.getCnpj());
+			assertEquals("06615406004", faturaCadastrada.getCpf());
 			assertTrue(faturaRepository.count() > 0);
 		} catch (Exception e) {
 			logger.info(">>>>>> ct01 - nao deveria falhar => " + e.getMessage());

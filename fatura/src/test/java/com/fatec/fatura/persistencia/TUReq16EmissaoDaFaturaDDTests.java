@@ -21,10 +21,10 @@ class TUReq16EmissaoDaFaturaDDTests {
 	}
 
 	@ParameterizedTest
-	@CsvFileSource(files = "c:/edson/dataset_fatura/fatura2.csv", numLinesToSkip = 1)
-	void validaFatura(String cnpj, String dataVencimento, String desc, String valor, String re) {
+	@CsvFileSource(files = "e:/dataset_fatura/fatura2.csv", numLinesToSkip = 1)
+	void validaFatura(String cpf, String dataVencimento, String desc, String valor, String re) {
 		try {
-			fatura = new Fatura(cnpj, dataVencimento, desc, valor);
+			fatura = new Fatura(cpf, dataVencimento, desc, valor);
 			assertNotNull(fatura);
 			String dataDeHoje = obtemDataAtual();
 			assertEquals(dataDeHoje,fatura.getDataEmissao());

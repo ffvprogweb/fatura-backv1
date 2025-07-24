@@ -31,7 +31,7 @@ class Req16EmissaoDaFaturaTests {
 		// Given - dado que as informacoes de cliente sao validas E que existem 3
 		// clientes cadastrados
 		// ********************************************************************************************
-		FaturaDto faturaDto = new FaturaDto("71112917000126","", "02/10/2025", "moveis planejados", "1000.50");
+		FaturaDto faturaDto = new FaturaDto("21805801007","", "02/10/2025", "moveis planejados", "1000.50");
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
@@ -49,7 +49,7 @@ class Req16EmissaoDaFaturaTests {
 		logger.info(">>>>>> teste web post registrar fatura --> " + response.getBody().toString());
 	
 			
-		assertEquals("71112917000126", faturaCadastrada.getCnpj());
+		assertEquals("21805801007", faturaCadastrada.getCpf());
 		assertEquals(1, faturaCadastrada.getId()); // Verifica se o ID foi setado corretamente
 	}
 

@@ -21,7 +21,7 @@ public class FaturaService implements IFaturaServico {
 		try {
 			logger.info(">>>>>> 2 fatura service metodo registrar fatura iniciado --> " + f.servicoContratado());
 			//obtem a data de hoje do sistema e instancia o objeto fatura
-			Fatura fatura = new Fatura(f.cnpj(), f.dataVencimento(), f.servicoContratado(), f.valor());
+			Fatura fatura = new Fatura(f.cpf(), f.dataVencimento(), f.servicoContratado(), f.valor());
 			Fatura novaFatura = faturaRepository.save(fatura);
 			logger.info(">>>>>> 3 fatura service metodo registrar fatura response");
 			return new FaturaResponse(true, "Fatura registrada", novaFatura);
@@ -50,7 +50,7 @@ public class FaturaService implements IFaturaServico {
 	}
 
 	@Override
-	public List<Fatura> consultaCnpj(String cnpj) {
+	public List<Fatura> consultaCpf(String cpf) {
 		// TODO Auto-generated method stub
 		return null;
 	}

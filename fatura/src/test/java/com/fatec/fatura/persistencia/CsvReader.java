@@ -23,14 +23,14 @@ public class CsvReader {
                 // Verificar se a linha tem o número correto de campos
                 if (campos.length == 5) {
                     try {
-                        String cnpj = campos[0].trim();
+                        String cpf = campos[0].trim();
                         String dataVencimento = campos[1].trim();
                         String desc = campos[2].trim();
                         String valor = campos[3].trim();
                         String re = campos[4].trim();
 
                         // Criar um objeto Fatura com os dados lidos
-                        FaturaDadosDeTeste fatura = new FaturaDadosDeTeste(cnpj, dataVencimento, desc, valor, re);
+                        FaturaDadosDeTeste fatura = new FaturaDadosDeTeste(cpf, dataVencimento, desc, valor, re);
                         faturas.add(fatura);
                     } catch (Exception e) {
                         System.err.println("Erro na leitura do arquivo na linha: " + linha);

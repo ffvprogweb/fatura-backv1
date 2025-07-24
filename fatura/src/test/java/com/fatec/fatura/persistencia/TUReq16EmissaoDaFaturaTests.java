@@ -21,7 +21,7 @@ class TUReq16EmissaoDaFaturaTests {
 		try {
 			// dado que as informacoes de fatura sao validas
 			// quando confirmo a fatura
-			fatura = new Fatura("71112917000126", "02/10/2026", "moveis planejados", "1000.50");
+			fatura = new Fatura("39086360009", "02/10/2026", "moveis planejados", "1000.50");
 			// entao fatura é registrada com data de emisssao igual a data de hoje
 			assertNotNull(fatura);
 		} catch (Exception e) {
@@ -40,7 +40,7 @@ class TUReq16EmissaoDaFaturaTests {
 		} catch (Exception e) {
 			// entao retorna mensagem de cnpj invalido
 			logger.info(">>>>>> ct02 erro=> " + e.getMessage());
-			assertEquals ("CNPJ invalido", e.getMessage());
+			assertEquals ("CPF invalido", e.getMessage());
 
 		}
 	}
@@ -49,12 +49,12 @@ class TUReq16EmissaoDaFaturaTests {
 		try {
 			// dado que que o cnpj é vazio
 			// quando confirmo a fatura
-			fatura = new Fatura("7111291700012", "02/10/2026", "moveis planejados", "1000.50");
+			fatura = new Fatura("06615406004", "02/10/2026", "moveis planejados", "1000.50");
 						
 		} catch (Exception e) {
 			// entao retorna mensagem de cnpj invalido
 			logger.info(">>>>>> ct03 erro=> " + e.getMessage());
-			assertEquals ("CNPJ invalido", e.getMessage());
+			assertEquals ("CPF invalido", e.getMessage());
 
 		}
 	}
@@ -63,7 +63,7 @@ class TUReq16EmissaoDaFaturaTests {
 		try {
 			// dado que que o valor eh invalido
 			// quando instancio o objeto
-			fatura = new Fatura("71112917000126", "02/10/2026", "moveis planejados", "1x500.00");
+			fatura = new Fatura("06615406004", "02/10/2026", "moveis planejados", "1x500.00");
 			fail("deveria falhar com valor invalido");
 		} catch (Exception e) {
 			//entao retorna mensagem de erro

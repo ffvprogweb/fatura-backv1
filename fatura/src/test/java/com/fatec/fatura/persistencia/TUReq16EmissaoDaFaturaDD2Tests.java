@@ -20,7 +20,7 @@ public class TUReq16EmissaoDaFaturaDD2Tests {
 	public void ct_verifica_comportamento_fatura() {
 		String resultadoEsperado = "";
 		try {
-			d = CsvReader.lerArquivo("c:/edson/dataset_fatura/fatura2.csv");
+			d = CsvReader.lerArquivo("e:/dataset_fatura/fatura2.csv");
 			System.out.println(">>>>>>>>> quantidade de registros =>" + d.size());
 		} catch (IOException e) {
 			System.out.println(">>>>>> Erro de IO => " + e.getMessage());
@@ -28,9 +28,9 @@ public class TUReq16EmissaoDaFaturaDD2Tests {
 
 		for (FaturaDadosDeTeste f : d) {
 			try {
-				System.out.println(">>>>>> fatura numero => " + f.cnpj());
+				System.out.println(">>>>>> cpf numero => " + f.cpf());
 				resultadoEsperado = f.re();
-				fatura = new Fatura(f.cnpj(), f.dtemissao(), f.servico(), f.valor());
+				fatura = new Fatura(f.cpf(), f.dtemissao(), f.servico(), f.valor());
 				assertNotNull(fatura);
 				assertEquals(resultadoEsperado, "satisfatório");
 
