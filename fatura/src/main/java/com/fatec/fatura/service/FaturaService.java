@@ -27,7 +27,7 @@ public class FaturaService implements IFaturaServico {
 	FaturaRepository faturaRepository;
 
 	/*
-	 * Uma fatura somente deve ser cadastrada se o cpf estiver cadastrado
+	 * Uma fatura somente pode ser cadastrada se o cpf estiver cadastrado
 	 */
 	@Override
 	public FaturaResponse registrar(FaturaDto f) {
@@ -73,15 +73,20 @@ public class FaturaService implements IFaturaServico {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	/*
+	 * cosulta as faturas registradas para este cliente
+	 * a confirmação de paganmento nao foi implementada
+	 */
 	@Override
 	public List<Fatura> consultaTodos() {
 		return faturaRepository.findAll();
 	}
 
 	/*
-	 * Verifica se o cliente esta cadastrado o cpf é enviado no corpo da mensagem
-	 * post para nao trafegar na url.
+	 * Verifica se o cliente esta cadastrado, o cpf é enviado no corpo da mensagem
+	 * post, para nao trafegar na url.
+	 * Para simplificar o tratamento na camada web, erros não esperados são tratados na 
+	 * console de operação
 	 */
 	public boolean cpfCadastrado(String cpf) {
 		logger.info(">>>>>> fatura servico cpfcadastrado iniciado =>" + cpf);
@@ -111,7 +116,7 @@ public class FaturaService implements IFaturaServico {
 			}
 
 		} catch (HttpClientErrorException e) {
-			logger.warn(">>>>>> Erro no acesso a API => " + e.getMessage());
+			logger.warn(">>>>>> Erro não esperado no acesso a API => " + e.getMessage());
 			return false;
 		}
 
