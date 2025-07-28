@@ -81,7 +81,12 @@ public class Fatura {
 					"Data de vencimento: formato invalido ou domingo ou menor que data atual");
 		}
 	}
-
+	/**
+     * Verifica se a data fornecida é um domingo.
+     *
+     * @param data A data no formato "dd/MM/yyyy".
+     * @return true se a data for um domingo e estiver em um formato válido, false caso contrário.
+     */
 	public boolean ehDomingo(String data) {
 		if (dataIsValida(data) && data != null) {
 			DateTimeFormatter fmt = DateTimeFormat.forPattern("dd/MM/yyyy");
@@ -120,34 +125,33 @@ public class Fatura {
 			DateTime dtVenc = formatter.parseDateTime(dataVencimento);
 
 			Days d = Days.daysBetween(dtAtual, dtVenc);
-			if (d.getDays() >= 0) {
-
-				return true;
-			} else {
-				return false;
-			}
+			return d.getDays() >= 0;
 		} catch (Exception e) {
 
 			throw new IllegalArgumentException("Fatura data invalida => " + e.getMessage());
 		}
 	}
+	/*
+	 * 
+	 */
 
-	public double setValorFatura(String entrada) {
-		try {
-			Double valorTemp = Double.parseDouble(entrada);
+	public void setValorFatura(String valorString) {
+	    if (valorString == null || valorString.trim().isEmpty()) {
+	        throw new IllegalArgumentException("O valor da fatura não pode ser nulo ou vazio.");
+	    }
 
-			if (valorTemp > 0) {
-				DecimalFormat formato = new DecimalFormat("#,##0.00");
-				String valorFormatado = formato.format(valorTemp);
-				this.valor = valorTemp;
-				return valorTemp;
-			} else {
-				throw new IllegalArgumentException("Valor da fatura invalido");
-			}
-		} catch (Exception e) {
+	    try {
+	        double valorConvertido = Double.parseDouble(valorString);
 
-			throw new IllegalArgumentException("Valor da fatura invalido");
-		}
+	        if (valorConvertido > 0) {
+	            this.valor = valorConvertido;
+	        } else {
+	            throw new IllegalArgumentException("O valor da fatura deve ser maior que zero.");
+	        }
+	    } catch (NumberFormatException e) {
+	        // Captura apenas a exceção de formato numérico inválido
+	        throw new IllegalArgumentException("Valor da fatura invalido", e);
+	    }
 	}
 
 	/*

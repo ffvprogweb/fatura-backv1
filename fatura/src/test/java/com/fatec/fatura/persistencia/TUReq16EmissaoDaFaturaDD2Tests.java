@@ -25,10 +25,11 @@ public class TUReq16EmissaoDaFaturaDD2Tests {
 		} catch (IOException e) {
 			System.out.println(">>>>>> Erro de IO => " + e.getMessage());
 		}
-
+		int registro = 1;
 		for (FaturaDadosDeTeste f : d) {
+			
 			try {
-				System.out.println(">>>>>> cpf numero => " + f.cpf());
+				System.out.println(">>>>>> registro => " + registro);
 				resultadoEsperado = f.re();
 				fatura = new Fatura(f.cpf(), f.dtemissao(), f.servico(), f.valor());
 				assertNotNull(fatura);
@@ -36,9 +37,10 @@ public class TUReq16EmissaoDaFaturaDD2Tests {
 
 			}
 			catch (Exception e) {
-				System.out.println(">>>>>> classe invalida =>" + e.getMessage() + "-" + resultadoEsperado);
+				System.out.println(">>>>>> classe invalida resultado esperado =>" + resultadoEsperado + "- resultado obtido =>" + e.getMessage());
 				assertEquals(resultadoEsperado, e.getMessage());
 			}
+			registro = registro + 1;
 		}
 	}
 

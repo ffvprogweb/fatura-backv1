@@ -28,8 +28,7 @@ class Req16EmissaoDaFaturaTests {
 	void validaAPI() {
 		String URLBase = "/api/v1/faturas";
 		// ********************************************************************************************
-		// Given - dado que as informacoes de cliente sao validas E que existem 3
-		// clientes cadastrados
+		// Given - dado que as informacoes sao validas e o cliente esta cadastrado)
 		// ********************************************************************************************
 		FaturaDto faturaDto = new FaturaDto("21805801007","", "02/10/2025", "moveis planejados", "1000.50");
 

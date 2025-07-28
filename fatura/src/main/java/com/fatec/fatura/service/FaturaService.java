@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import com.fatec.fatura.model.ClienteRecordDTO;
+import com.fatec.fatura.model.ClienteDto;
 import com.fatec.fatura.model.Fatura;
 import com.fatec.fatura.model.FaturaDto;
 
@@ -89,21 +89,21 @@ public class FaturaService implements IFaturaServico {
 	 * console de operação
 	 */
 	public boolean cpfCadastrado(String cpf) {
-		logger.info(">>>>>> fatura servico cpfcadastrado iniciado =>" + cpf);
+		logger.info(">>>>>> fatura servico consulta api cpfcadastrado iniciado =>" + cpf);
 		String API_URL = "http://localhost:8081/api/v1/clientes/cpf";
 
 		RestTemplate restTemplate = new RestTemplate();
 		// cria o dto com o cpf para enviar no corpo da requisicao
-		ClienteRecordDTO clienteRequest = new ClienteRecordDTO(cpf, "", "", "");
+		ClienteDto clienteRequest = new ClienteDto(cpf, "", "", "");
 		// Configura os cabeçalhos para indicar que o corpo é JSON
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		// Cria a entidade HTTP com o corpo (JSON do CPF) e os cabeçalhos
-		HttpEntity<ClienteRecordDTO> requestEntity = new HttpEntity<>(clienteRequest, headers);
+		HttpEntity<ClienteDto> requestEntity = new HttpEntity<>(clienteRequest, headers);
 		try {
 			//Consulta servico de cliente
-			ResponseEntity<ClienteRecordDTO> response = restTemplate.postForEntity(API_URL, requestEntity,
-					ClienteRecordDTO.class);
+			ResponseEntity<ClienteDto> response = restTemplate.postForEntity(API_URL, requestEntity,
+					ClienteDto.class);
 			// Verifica o código de status da resposta
 			if (response.getStatusCode() == HttpStatus.OK) {
 				logger.info(">>>>>> CPF " + cpf + " encontrado. Detalhes: " + response.getBody());
@@ -116,7 +116,7 @@ public class FaturaService implements IFaturaServico {
 			}
 
 		} catch (HttpClientErrorException e) {
-			logger.warn(">>>>>> Erro não esperado no acesso a API => " + e.getMessage());
+			logger.warn(">>>>>> Fatura servico cpfcadastrado Erro não esperado no acesso a API => " + e.getMessage());
 			return false;
 		}
 
