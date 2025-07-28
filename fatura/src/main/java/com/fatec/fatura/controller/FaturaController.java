@@ -19,7 +19,7 @@ import com.fatec.fatura.service.FaturaResponse;
 import com.fatec.fatura.service.IFaturaServico;
 
 import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
+
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
@@ -37,8 +37,7 @@ public class FaturaController {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "201", description = "Fatura registrada", content = {
 					@Content(mediaType = "application/json") }),
-			@ApiResponse(responseCode = "400", description = "Dados invalidos no corpo da requisição", content = @Content),
-	})
+			@ApiResponse(responseCode = "400", description = "Dados invalidos no corpo da requisição", content = @Content), })
 	@PostMapping
 	@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true)
 	public ResponseEntity<Object> saveFatura(@RequestBody FaturaDto fatura) {

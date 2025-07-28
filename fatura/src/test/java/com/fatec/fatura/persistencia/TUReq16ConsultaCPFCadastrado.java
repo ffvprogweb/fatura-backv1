@@ -18,12 +18,13 @@ class TUReq16ConsultaCPFCadastrado {
 	@Test
 	void ct01_consulta_cpf_de_cliente_cadastrado() {
 		try {
-			//o cpf deve ser cadastrado no servico mantem cliente antes da pesquisa
+			// o cpf deve ser cadastrado no servico mantem cliente antes da pesquisa
 			assertTrue(servico.cpfCadastrado("34722268037"));
 		} catch (ResourceAccessException e) {
 			fail("nao deveria falhar");
 			System.out.println(e.getMessage());
-			//I/O error on POST request for "https://localhost:8081/api/v1/clientes/cpf": Connection refused: connect
+			// I/O error on POST request for "https://localhost:8081/api/v1/clientes/cpf":
+			// Connection refused: connect
 		}
 	}
 

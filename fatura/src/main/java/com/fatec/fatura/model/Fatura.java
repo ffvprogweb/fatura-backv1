@@ -1,7 +1,6 @@
 package com.fatec.fatura.model;
 
 import java.text.DateFormat;
-import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.InputMismatchException;
@@ -74,29 +73,27 @@ public class Fatura {
 	public String setDataVencimento(String data) {
 		if ((data != null) && (dataIsValida(data)) && (dtVencMaiorDtAtual(getDataEmissao(), data))
 				&& (!ehDomingo(data))) {
-            this.dataVencimento = data;
+			this.dataVencimento = data;
 			return data;
 		} else {
 			throw new IllegalArgumentException(
 					"Data de vencimento: formato invalido ou domingo ou menor que data atual");
 		}
 	}
+
 	/**
-     * Verifica se a data fornecida é um domingo.
-     *
-     * @param data A data no formato "dd/MM/yyyy".
-     * @return true se a data for um domingo e estiver em um formato válido, false caso contrário.
-     */
+	 * Verifica se a data fornecida é um domingo.
+	 *
+	 * @param data A data no formato "dd/MM/yyyy".
+	 * @return true se a data for um domingo e estiver em um formato válido, false
+	 *         caso contrário.
+	 */
 	public boolean ehDomingo(String data) {
 		if (dataIsValida(data) && data != null) {
 			DateTimeFormatter fmt = DateTimeFormat.forPattern("dd/MM/yyyy");
 			DateTime umaData = fmt.parseDateTime(data);
-			if (umaData.dayOfWeek().getAsText().equals("domingo")) {
+			return umaData.dayOfWeek().getAsText().equals("domingo");
 
-				return true;
-			} else {
-				return false;
-			}
 		} else {
 			return false;
 		}
@@ -136,22 +133,22 @@ public class Fatura {
 	 */
 
 	public void setValorFatura(String valorString) {
-	    if (valorString == null || valorString.trim().isEmpty()) {
-	        throw new IllegalArgumentException("O valor da fatura não pode ser nulo ou vazio.");
-	    }
+		if (valorString == null || valorString.trim().isEmpty()) {
+			throw new IllegalArgumentException("O valor da fatura não pode ser nulo ou vazio.");
+		}
 
-	    try {
-	        double valorConvertido = Double.parseDouble(valorString);
+		try {
+			double valorConvertido = Double.parseDouble(valorString);
 
-	        if (valorConvertido > 0) {
-	            this.valor = valorConvertido;
-	        } else {
-	            throw new IllegalArgumentException("O valor da fatura deve ser maior que zero.");
-	        }
-	    } catch (NumberFormatException e) {
-	        // Captura apenas a exceção de formato numérico inválido
-	        throw new IllegalArgumentException("Valor da fatura invalido", e);
-	    }
+			if (valorConvertido > 0) {
+				this.valor = valorConvertido;
+			} else {
+				throw new IllegalArgumentException("O valor da fatura deve ser maior que zero.");
+			}
+		} catch (NumberFormatException e) {
+			// Captura apenas a exceção de formato numérico inválido
+			throw new IllegalArgumentException("Valor da fatura invalido", e);
+		}
 	}
 
 	/*

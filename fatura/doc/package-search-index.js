@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.fatec.fatura"},{"l":"com.fatec.fatura.controller"},{"l":"com.fatec.fatura.model"},{"l":"com.fatec.fatura.persistencia"},{"l":"com.fatec.fatura.service"},{"l":"com.fatec.fatura.servico"},{"l":"com.fatec.fatura.web"}];updateSearchResults();

@@ -34,7 +34,6 @@ class TIReq16EmissaoDaFaturaTests {
 	// @Autowired
 	private TestRestTemplate restTemplate;
 
-	
 	void setup() {
 		try {
 			restTemplate = new TestRestTemplate();
@@ -45,19 +44,19 @@ class TIReq16EmissaoDaFaturaTests {
 			HttpEntity<ClienteDto> request = new HttpEntity<>(clienteDto, headers);
 			ResponseEntity<ClienteTemp> response = restTemplate.postForEntity(URLBase, request, ClienteTemp.class);
 			System.out.println(">>>>>> setup de teste status code => " + response.getStatusCode());
-			//assertEquals(HttpStatus.CREATED, response.getStatusCode());
-		
+			// assertEquals(HttpStatus.CREATED, response.getStatusCode());
+
 		} catch (Exception e) {
 			System.out.println(">>>>>> erro => " + e.getMessage());
 			fail("nao deveria falhar => " + e.getMessage());
-			
+
 		}
 	}
 
 	@Test
 	void ct01_quando_dados_validos_fatura_nao_eh_nulo() {
 		try {
-            setup();
+			setup();
 			// dado que as informacoes de fatura sao validas
 			// quando confirmo a fatura
 			FaturaDto fatura = new FaturaDto("21805801007", "", "02/10/2025", "moveis planejados", "1000.50");

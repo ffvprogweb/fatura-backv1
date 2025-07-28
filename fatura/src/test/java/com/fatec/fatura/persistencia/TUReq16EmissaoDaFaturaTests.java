@@ -10,12 +10,11 @@ import org.junit.jupiter.api.Test;
 
 import com.fatec.fatura.model.Fatura;
 
-
 class TUReq16EmissaoDaFaturaTests {
 
 	Logger logger = LogManager.getLogger(this.getClass());
 	Fatura fatura;
-	
+
 	@Test
 	void ct01_quando_dados_validos_fatura_nao_eh_nulo() {
 		try {
@@ -30,34 +29,37 @@ class TUReq16EmissaoDaFaturaTests {
 
 		}
 	}
+
 	@Test
 	void ct02_quando_cnpj_invalido_vazio_mensagem_de_erro() {
 		try {
 			// dado que que o cnpj é vazio
 			// quando confirmo a fatura
 			fatura = new Fatura("", "02/10/2026", "moveis planejados", "1000.50");
-			fail("deveria falhar fatura invalida");			
+			fail("deveria falhar fatura invalida");
 		} catch (Exception e) {
 			// entao retorna mensagem de cnpj invalido
 			logger.info(">>>>>> ct02 erro=> " + e.getMessage());
-			assertEquals ("CPF invalido", e.getMessage());
+			assertEquals("CPF invalido", e.getMessage());
 
 		}
 	}
+
 	@Test
 	void ct03_quando_cnpj_invalido_formato_mensagem_de_erro() {
 		try {
 			// dado que que o cnpj é vazio
 			// quando confirmo a fatura
 			fatura = new Fatura("06615406004", "02/10/2026", "moveis planejados", "1000.50");
-						
+
 		} catch (Exception e) {
 			// entao retorna mensagem de cnpj invalido
 			logger.info(">>>>>> ct03 erro=> " + e.getMessage());
-			assertEquals ("CPF invalido", e.getMessage());
+			assertEquals("CPF invalido", e.getMessage());
 
 		}
 	}
+
 	@Test
 	void ct04_quando_valor_invalido_entao_retorna_msg_erro() {
 		try {
@@ -66,10 +68,10 @@ class TUReq16EmissaoDaFaturaTests {
 			fatura = new Fatura("06615406004", "02/10/2026", "moveis planejados", "1x500.00");
 			fail("deveria falhar com valor invalido");
 		} catch (Exception e) {
-			//entao retorna mensagem de erro
-			assertEquals ("Valor da fatura invalido", e.getMessage());
+			// entao retorna mensagem de erro
+			assertEquals("Valor da fatura invalido", e.getMessage());
 		}
-		
+
 	}
-	
+
 }

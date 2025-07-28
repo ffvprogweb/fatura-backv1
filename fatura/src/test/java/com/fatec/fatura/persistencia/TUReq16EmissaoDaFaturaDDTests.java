@@ -13,6 +13,7 @@ import com.fatec.fatura.model.Fatura;
 
 class TUReq16EmissaoDaFaturaDDTests {
 	Fatura fatura = new Fatura();
+
 	public String obtemDataAtual() {
 		DateTime data = new DateTime();
 		DateTimeFormatter fmt = DateTimeFormat.forPattern("dd/MM/YYYY");
@@ -27,12 +28,11 @@ class TUReq16EmissaoDaFaturaDDTests {
 			fatura = new Fatura(cpf, dataVencimento, desc, valor);
 			assertNotNull(fatura);
 			String dataDeHoje = obtemDataAtual();
-			assertEquals(dataDeHoje,fatura.getDataEmissao());
-			assertEquals (re,"satisfatório");
+			assertEquals(dataDeHoje, fatura.getDataEmissao());
+			assertEquals(re, "satisfatório");
 		} catch (Exception e) {
 			assertEquals(re, e.getMessage());
 		}
 	}
-
 
 }

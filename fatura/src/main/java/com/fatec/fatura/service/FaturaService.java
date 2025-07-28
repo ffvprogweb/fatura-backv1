@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -73,9 +72,10 @@ public class FaturaService implements IFaturaServico {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	/*
-	 * cosulta as faturas registradas para este cliente
-	 * a confirmação de paganmento nao foi implementada
+	 * cosulta as faturas registradas para este cliente a confirmação de paganmento
+	 * nao foi implementada
 	 */
 	@Override
 	public List<Fatura> consultaTodos() {
@@ -84,9 +84,8 @@ public class FaturaService implements IFaturaServico {
 
 	/*
 	 * Verifica se o cliente esta cadastrado, o cpf é enviado no corpo da mensagem
-	 * post, para nao trafegar na url.
-	 * Para simplificar o tratamento na camada web, erros não esperados são tratados na 
-	 * console de operação
+	 * post, para nao trafegar na url. Para simplificar o tratamento na camada web,
+	 * erros não esperados são tratados na console de operação
 	 */
 	public boolean cpfCadastrado(String cpf) {
 		logger.info(">>>>>> fatura servico consulta api cpfcadastrado iniciado =>" + cpf);
@@ -101,9 +100,8 @@ public class FaturaService implements IFaturaServico {
 		// Cria a entidade HTTP com o corpo (JSON do CPF) e os cabeçalhos
 		HttpEntity<ClienteDto> requestEntity = new HttpEntity<>(clienteRequest, headers);
 		try {
-			//Consulta servico de cliente
-			ResponseEntity<ClienteDto> response = restTemplate.postForEntity(API_URL, requestEntity,
-					ClienteDto.class);
+			// Consulta servico de cliente
+			ResponseEntity<ClienteDto> response = restTemplate.postForEntity(API_URL, requestEntity, ClienteDto.class);
 			// Verifica o código de status da resposta
 			if (response.getStatusCode() == HttpStatus.OK) {
 				logger.info(">>>>>> CPF " + cpf + " encontrado. Detalhes: " + response.getBody());

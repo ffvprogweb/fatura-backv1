@@ -10,7 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +29,7 @@ class Req16EmissaoDaFaturaTests {
 		// ********************************************************************************************
 		// Given - dado que as informacoes sao validas e o cliente esta cadastrado)
 		// ********************************************************************************************
-		FaturaDto faturaDto = new FaturaDto("21805801007","", "02/10/2025", "moveis planejados", "1000.50");
+		FaturaDto faturaDto = new FaturaDto("21805801007", "", "02/10/2025", "moveis planejados", "1000.50");
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
@@ -38,7 +37,8 @@ class Req16EmissaoDaFaturaTests {
 		// ********************************************************************
 		// When - quando confirmo o cadastro do cliente
 		// ********************************************************************
-		//ResponseEntity<Fatura> response = restTemplate.exchange(URLBase, HttpMethod.POST, request, Fatura.class);
+		// ResponseEntity<Fatura> response = restTemplate.exchange(URLBase,
+		// HttpMethod.POST, request, Fatura.class);
 		ResponseEntity<Fatura> response = restTemplate.postForEntity(URLBase, request, Fatura.class);
 		// ********************************************************************
 		// Then - entao retorna os detalhes do cliente cadastrado
@@ -46,8 +46,7 @@ class Req16EmissaoDaFaturaTests {
 		assertEquals(HttpStatus.CREATED, response.getStatusCode());
 		Fatura faturaCadastrada = response.getBody();
 		logger.info(">>>>>> teste web post registrar fatura --> " + response.getBody().toString());
-	
-			
+
 		assertEquals("21805801007", faturaCadastrada.getCpf());
 		assertEquals(1, faturaCadastrada.getId()); // Verifica se o ID foi setado corretamente
 	}

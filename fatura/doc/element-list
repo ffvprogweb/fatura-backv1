@@ -1,0 +1,7 @@
+com.fatec.fatura
+com.fatec.fatura.controller
+com.fatec.fatura.model
+com.fatec.fatura.persistencia
+com.fatec.fatura.service
+com.fatec.fatura.servico
+com.fatec.fatura.web

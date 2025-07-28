@@ -27,7 +27,7 @@ public class TUReq16EmissaoDaFaturaDD2Tests {
 		}
 		int registro = 1;
 		for (FaturaDadosDeTeste f : d) {
-			
+
 			try {
 				System.out.println(">>>>>> registro => " + registro);
 				resultadoEsperado = f.re();
@@ -35,9 +35,9 @@ public class TUReq16EmissaoDaFaturaDD2Tests {
 				assertNotNull(fatura);
 				assertEquals(resultadoEsperado, "satisfatório");
 
-			}
-			catch (Exception e) {
-				System.out.println(">>>>>> classe invalida resultado esperado =>" + resultadoEsperado + "- resultado obtido =>" + e.getMessage());
+			} catch (Exception e) {
+				System.out.println(">>>>>> classe invalida resultado esperado =>" + resultadoEsperado
+						+ "- resultado obtido =>" + e.getMessage());
 				assertEquals(resultadoEsperado, e.getMessage());
 			}
 			registro = registro + 1;
